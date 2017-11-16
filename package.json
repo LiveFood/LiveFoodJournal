@@ -1,0 +1,25 @@
+{
+  "name": "LiveFoodJournal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiveFood/LiveFoodJournal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiveFood/LiveFoodJournal/issues"
+  },
+  "homepage": "https://github.com/LiveFood/LiveFoodJournal#readme",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^4.0.1",
+    "superagent": "^3.8.1"
+  }
+}
