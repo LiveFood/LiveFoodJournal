@@ -1,0 +1,26 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiveFood/LiveFoodJournal.git"
+  },
+  "keywords": [
+    "[]"
+  ],
+  "author": "brian namgung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiveFood/LiveFoodJournal/issues"
+  },
+  "homepage": "https://github.com/LiveFood/LiveFoodJournal#readme"
+}
