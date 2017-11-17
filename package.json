@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "start": "node index.js",
+    "test": "nyc mocha",
+    "lint": "eslint",
+    "start-db": "mkdir -p ./db && mongod --dbpath ./db",
+    "stop-db": "killall mongod"
   },
   "repository": {
     "type": "git",
