@@ -9,20 +9,17 @@
     "lint": "eslint",
     "start-db": "mkdir -p ./db && mongod --dbpath ./db",
     "stop-db": "killall mongod"
-
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LiveFood/LiveFoodJournal.git"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LiveFood/LiveFoodJournal/issues"
   },
-
   "homepage": "https://github.com/LiveFood/LiveFoodJournal#readme",
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
