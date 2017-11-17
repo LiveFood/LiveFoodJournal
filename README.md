@@ -14,6 +14,7 @@
 - express
 - bcrypt
 - jwt (jsonwebtoken)
+- bluebird
 
 
 
