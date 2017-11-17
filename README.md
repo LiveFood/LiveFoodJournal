@@ -11,9 +11,9 @@
 
 *-[Install Packages]-*
 - mongoose
-- mongodb
-- blowfish (encryption)
-- oauth (?)
+- express
+- bcrypt
+- jwt (jsonwebtoken)
 
 
 
