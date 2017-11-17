@@ -2,23 +2,27 @@
 
 
 
-# USER MOBILE - Basic Authorization
+*-[USER MOBILE - Basic Authorization]-*
 - create a user (username : password)
 - model (created w mongoose)
 - post (save json) => post (username : password)
 
 
 
-# Install Packages
+*-[Install Packages]-*
 - mongoose
 - mongodb
 - blowfish (encryption)
-- oauth?
+- oauth (?)
 
 
 
-# Ecryption
+*-Ecryption-*
 - https for security
-- hash => 1 way algorithm => bcrypt
-- hashing => you can't retrieve text back
-- blowfish => if you have secret key (you may convert into text)
+- hash is a 1 way algorithm (bcrypt)
+- hashing (you can't retrieve text back)
+- blowfish (if you have secret key (you may convert into text)
+
+
+
+***If you're using a website where you can recover your old password.. STOP USING THAT WEBSITE***
