@@ -34,3 +34,44 @@ userSchema.methods.comparePasswordHash = function (p) {
 
     });
 };
+
+
+userSchema.methods.createTokenSeed = function () {
+
+  return new Promise((res, rej) => {
+    let tries = 1;
+
+    let _tokenSeedCreate = () => {
+
+      this.tokenSeed = crypto.randomBytes(32).toString('hex');
+      this.save()
+        .then(() => res(this))
+        .catch(() => {
+
+          if(tries < 1) {return rej(new Error('failed to create token seed'));}
+          else{tries--;}
+
+          _tokenSeedCreate();
+        });
+    };
+
+    _tokenSeedCreate();
+  });
+};
+
+userSchema.methods.createToken = function () {
+
+  return this.createTokenSeed()
+    .then(() => jwt.sign({tokenSeed: this.tokenSeed}, process.env.APP_SECRET));
+};
+
+const User = module.exports = mongoose.model('user', userSchema);
+
+User.create = function (data) {
+
+  let password = data.password;
+  delete data.password;
+
+  return new User (data).createPasswordHash(password)
+    .then(user => user.createToken());
+};
