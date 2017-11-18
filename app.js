@@ -70,5 +70,38 @@ app.post("/account", (request, response) => {
 
 
 
+app.post("/login", (request, response) => {
+  if(!request.body.email) {
+    return response.status(401).send({ "message" : "email is required" });
 
+  } else if(!request.body.password) {
+
+    return response.status(401).send({ "message" : "password is required" });
+  }
+
+  bucket.get(request.body.email, (error, result) => {
+    if(error) {
+      return response.status(500).send(error);
+
+    }
+    if(!Bcrypt.compareSync(request.body.password, result.value.password)) {
+      return response.status(500).send({ "message" : "invalid password" });
+    }
+
+    var session = {
+      "type" : "session",
+      "id" : UUID.v4(),
+      "pid" : result.value.pid
+    };
+
+
+    bucket.insert(session.id, session, { "expiry" : 3600 }, (error, result) => {
+      if(error) {
+        return response.status(500).send(error);
+      }
+      response.send({ "sid" : session.id });
+
+    });
+  });
+});
 //includes the downloaded dependencies and then initiates within project.
