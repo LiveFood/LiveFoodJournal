@@ -22,3 +22,15 @@ userSchema.methods.createPasswordHash = function (p) {
       return this;
     });
 };
+
+userSchema.methods.comparePasswordHash = function (p) {
+
+  return bcrypt.compare(p, this.passwordHash)
+    .then(successful => {
+
+      if(successful) {return this;}
+
+      else {throw new Error('Access Denied, password mismatch');}
+
+    });
+};
