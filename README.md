@@ -30,6 +30,10 @@
 
 
 
+Authorization: Bearer <access_token>
+
+
+
 # App.js
 
 - first we're checking to make sure both an email and password exists.
