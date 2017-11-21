@@ -1,5 +1,5 @@
 'use strict';
-
+//my server
 const express = require('express');
 const app = express();
 const journals = require('./routes/journals');
