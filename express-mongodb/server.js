@@ -2,7 +2,8 @@
 //
 const express = require('express');
 const promAll = require('bluebird').promisifyAll;
-const MongoClient = promAll(require('mongodb').MongoClient);
+const mongodb = require('mongodb');
+const MongoClient = promAll(mongodb.MongoClient);
 const connection  = MongoClient.connectAsync('mongodb://localhost:27017/expressmongo');
 const jsonParser = require('body-parser').json();
 
@@ -28,7 +29,7 @@ app.post('/api/notes', jsonParser, (req, res) => {
 app.get('/api/notes', (req, res) => {
 //if req.query.id exists, our findQuery will be equal to an obj with _id=req.query.id
 //if it doesnt exist, findQuery will be = emptry obj and we'll find all our note
-  let findQuery = req.query.id ? {_id: req.query.id} : {};
+  let findQuery = req.query.id ? {_id: mongodb.ObjectId(req.query.id)} : {};
   connection.then(db => {
     const col = promAll(db.collection('notes'));
     col.findAsync(findQuery).then(cur => {
