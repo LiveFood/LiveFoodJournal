@@ -2,11 +2,11 @@
 //my server
 const express = require('express');
 const app = express();
+const jsonParser = require('body-parser').json();
+
 const journals = require('./routes/journals');
 
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.json());
+app.use(jsonParser.json());
 app.use('/api', journals);
 
 const port = process.env.PORT || 3000;
