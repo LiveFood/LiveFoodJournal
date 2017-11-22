@@ -31,6 +31,7 @@ function displayForm(res) {
   }
 
 
+
 function processAllFieldsOfTheFOrm(req, res) {
   var form = new formidable.IncomingForm();
 
