@@ -12,5 +12,6 @@ const journalSchema = new mongoose.Schema({
 // module.exports = mongoose.model('Journal', journalSchema);
 const Journal = module.exports = mongoose.model('Journal', journalSchema);
 
+
 //
 // echo '{"authorid":"Max", "mealConsumed":"burger", "mealFeedback":"tastes good!"}' | http POST http://localhost:3001/api/journal
