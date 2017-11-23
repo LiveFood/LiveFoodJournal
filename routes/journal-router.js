@@ -7,9 +7,10 @@ const jsonParser = require('body-parser').json();
 const promAll = require('bluebird').promisifyAll;
 const MongoClient = promAll(mongodb.MongoClient);
 const connection  = MongoClient.connectAsync('mongodb://localhost:27017/expressmongo');
+//leave this here, will work when uncomment and implement
 // const bearerAuth = require('../lib/bearer-auth.js');
+//breaks if you uncomment this and  bearerAuth below as it's not fully implemented yet
 
-//have body parser!!!
 router.post('/api/journal', jsonParser, /*bearerAuth,*/ (req, res, next) => {//insert bearerAuth in there <-
   console.log('HERE IN POST');
   connection.then(db => {
