@@ -49,15 +49,19 @@ router.get('/api/journal', (req, res, next) => {
 
 router.delete('/api/journal/:id', (req, res, next) => {
   console.log('we are in DEL and the ID is ' + req.params.id);
-  let findQuery = req.params.id ? {_id: mongodb.ObjectId(req.params.id)} : {};
-  connection.then(db => {
-    const col = promAll(db.collection('journal'));
-    col.removeAsync(findQuery)
-      .then(result => { //if/then statement to say if something got deleted or not
-        res.send(result + ' I deleted journal id ' + req.params.id);
-      })
-      .catch((err) => res.status(500).send('server error ' + err));
-  });
+  Journal.remove({_id: req.params.id})
+    .then(data => res.send('the journal entry with ID '+ req.params.id + ' has been deleted.'))
+    .catch(err => next({error: err}));
+
+  // let findQuery = req.params.id ? {_id: mongodb.ObjectId(req.params.id)} : {};
+  // connection.then(db => {
+  //   const col = promAll(db.collection('journal'));
+  //   col.removeAsync(findQuery)
+  //     .then(result => { //if/then statement to say if something got deleted or not
+  //       res.send(result + ' I deleted journal id ' + req.params.id);
+  //     })
+  //     .catch((err) => res.status(500).send('server error ' + err));
+  // });
 });
 
 module.exports = router;
