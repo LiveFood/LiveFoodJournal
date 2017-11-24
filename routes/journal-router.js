@@ -11,6 +11,8 @@ const connection  = MongoClient.connectAsync('mongodb://localhost:27017/expressm
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
 const Journal = require('../model/journal');
+const Recipe = require('../model/recipe');
+
 mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/expressmongo', {useMongoClient: true});
 // const bearerAuth = require('../lib/bearer-auth.js');
@@ -28,7 +30,24 @@ router.post('/api/journal', jsonParser, /*bearerAuth,*/ (req, res, next) => {//i
 //this GET will look for journal/12345
 router.get('/api/journal/:id', (req, res, next) => {
   Journal.findOne({_id: req.params.id})
-    .then(journal => res.send(journal))
+    .then(journal => {
+      // use the recipe id
+      const recipeID = journal.recipeID;
+      // console.log('recipe id is', recipeID);
+      // to look up recipe
+      Recipe.findOne({_id: recipeID})
+        .then(recipe => {
+          // get the name of the recipe
+          const mealName = recipe.mealName;
+          // console.log('mealname is ', mealName);
+          // and add it to journal object
+          const j = Object.assign({}, journal._doc);
+          j.mealName = mealName;
+          res.send(j);
+        })
+        .catch(err => next({error: err}));
+
+    })
     .catch(err => next({error: err}));
 });
 
@@ -39,20 +58,6 @@ router.get('/api/journal', (req, res, next) => {
   Journal.find(findObj)
     .then(journal => res.send(journal))
     .catch(err => next({error: err}));
-  //
-// if req.query.id exists, our findQuery will be equal to an obj with _id=req.query.id
-// if it doesnt exist, findQuery will be = emptry obj and we'll find all our note
-  // let findQuery = req.query.id ? {_id: mongodb.ObjectId(req.query.id)} : {};
-  // connection.then(db => {
-  //   const col = promAll(db.collection('journal'));
-  //   col.findAsync(findQuery).then(cur => {
-  //     promAll(cur).toArrayAsync()
-  //       .then(res.send.bind(res))
-  //       .catch(console.log)
-  //       .catch(() => res.status(500).send('server error'));
-  //   });
-  //   return db;
-  // });
 });
 
 router.patch('/api/journal/:id', jsonParser, (req, res, next) => {

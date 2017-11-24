@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
-  authorid: {type: String, required: true},
+  userID: {type: String, required: true},
   mealName: {type: String, required: true},
   ingredients: [{type: String, required: true}],
   cookingTime: {type: String},
