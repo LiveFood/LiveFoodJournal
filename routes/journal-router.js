@@ -25,6 +25,14 @@ router.post('/api/journal', jsonParser, /*bearerAuth,*/ (req, res, next) => {//i
 
 });
 
+//this GET will look for journal/12345
+router.get('/api/journal/:id', (req, res, next) => {
+  Journal.findOne({_id: req.params.id})
+    .then(journal => res.send(journal))
+    .catch(err => next({error: err}));
+});
+
+//this will GET query ?_id=123 or no ID and show all
 router.get('/api/journal', (req, res, next) => {
   console.log('HERE IN GET');
   let findObj = req.query || {};
@@ -45,6 +53,20 @@ router.get('/api/journal', (req, res, next) => {
   //   });
   //   return db;
   // });
+});
+
+router.patch('/api/journal/:id', jsonParser, (req, res, next) => {
+  delete req.body._id;
+  Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
+    .then(data => res.send('patched successfully '))
+    .catch(err => next({error: err}));
+});
+
+router.put('/api/journal/:id', jsonParser, (req, res, next) => {
+  delete req.body._id;
+  Journal.findOneAndUpdate({_id: req.params.id}, req.body)
+    .then(data => res.send('PUT was a success!'))
+    .catch(err => next({error: err}));
 });
 
 router.delete('/api/journal/:id', (req, res, next) => {
