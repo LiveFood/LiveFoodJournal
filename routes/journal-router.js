@@ -1,6 +1,6 @@
 'use strict';
 
-const express = require('express');
+const Express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
 const mongoose = require('mongoose');
