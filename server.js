@@ -12,7 +12,6 @@ app.use(require('./routes/journal-router'));
 app.use(require('./routes/recipe-router'));
 // app.use(require('./routes/user-router'));
 
-
 // const journals = require('./routes/journals');
 //
 // app.use(bodyParser.json());
