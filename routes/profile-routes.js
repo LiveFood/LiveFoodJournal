@@ -3,8 +3,8 @@
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var Express = require("express");
 var UUID = require("uuid");
-var BodyParser = require("body-parser");
-var Bcrypt = require("bcryptjs");
+var BodyParser = require('body-parser');
+var Bcrypt = require("bcrypt.js");
 
 var app = Express();
   app.use(BodyParser.json());
