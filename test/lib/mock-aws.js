@@ -2,7 +2,7 @@
 
 const awsMock = require('aws-sdk-mock');
 
-awsMock('S3', 'upload', function(params, cb) {
+awsMock.mock('S3', 'upload', function(params, cb) {
 
   if(params.ACL !== 'public-read') {return cb(new Error('ACL must be public-read'));}
 
@@ -28,3 +28,5 @@ awsMock.mock('S3', 'deleteObject', function(params, cb) {
 });
 
 //awsMock is not a function? Travis didnt like something =(
+//line 5 I added ".mock" at the beginning to make it "awsMock.mock"
+//maybe this will work?
