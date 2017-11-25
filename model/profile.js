@@ -1,12 +1,14 @@
 'use strict';
 
+
+
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
-var Express = require("express");
+var Expect = require("expect");
 var UUID = require("uuid");
 var BodyParser = require("body-parser");
 var Bcrypt = require("bcrypt.js");
 
-var app = Express();
+var app = Expect();
   app.use(BodyParser.json());
   app.use(BodyParser.urlencoded({ extended : true }));
 
