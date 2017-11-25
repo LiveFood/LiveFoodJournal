@@ -3,10 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
-// const mongodb = require('mongodb');
-// const promAll = require('bluebird').promisifyAll;
-// const MongoClient = promAll(mongodb.MongoClient);
-// const connection  = MongoClient.connectAsync('mongodb://localhost:27017/expressmongo');
 
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
@@ -59,7 +55,6 @@ router.delete('/api/recipe/:id', (req, res, next) => {
   Recipe.remove({_id: req.params.id})
     .then(data => res.send('The recipe entry with ID '+ req.params.id + ' has been deleted.'))
     .catch(err => next({error: err}));
-
 });
 
 module.exports = router;

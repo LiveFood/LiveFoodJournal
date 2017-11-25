@@ -12,5 +12,5 @@ const recipeSchema = new mongoose.Schema({
 });
 
 const Recipe = module.exports = mongoose.model('Recipe', recipeSchema);
-// console.log(Recipe);
+// console.log(Recipe); 
 //remove console log and linter for Recipe will freak out, why?
