@@ -8,7 +8,7 @@ module.exports = () => {
 
   return Promise.all([
     User.remove({}),
-    Profile.remove({}),
+    //Profile.remove({}),
     Journal.remove({}),
   ]);
 };
