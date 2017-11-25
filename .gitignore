@@ -5,7 +5,7 @@ db/
 .test.env
 .nyc_output
 build/
-node-modules
+node_modules/
 
 ### OSX ###
 .DS_Store
