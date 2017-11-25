@@ -3,10 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
-// const mongodb = require('mongodb');
-// const promAll = require('bluebird').promisifyAll;
-// const MongoClient = promAll(mongodb.MongoClient);
-// const connection  = MongoClient.connectAsync('mongodb://localhost:27017/expressmongo');
 
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
