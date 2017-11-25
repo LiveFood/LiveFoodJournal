@@ -26,3 +26,5 @@ awsMock.mock('S3', 'deleteObject', function(params, cb) {
 
   cb();
 });
+
+//awsMock is not a function? Travis didnt like something =(
