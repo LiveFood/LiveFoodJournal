@@ -55,7 +55,6 @@ router.delete('/api/recipe/:id', (req, res, next) => {
   Recipe.remove({_id: req.params.id})
     .then(data => res.send('The recipe entry with ID '+ req.params.id + ' has been deleted.'))
     .catch(err => next({error: err}));
-
 });
 
 module.exports = router;

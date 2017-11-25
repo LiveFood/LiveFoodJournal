@@ -26,7 +26,7 @@ router.get('/api/journal/:id', (req, res, next) => {
     .catch(err => next({error: err}));
 });
 
-//this will GET query ?_id=123 or no ID and show all
+//This will GET query ?_id=123 or no ID and show all
 router.get('/api/journal', (req, res, next) => {
   console.log('HERE IN GET');
   let findObj = req.query || {};
