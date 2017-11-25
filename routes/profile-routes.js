@@ -6,9 +6,7 @@ var UUID = require("uuid");
 var BodyParser = require("body-parser");
 var Bcrypt = require("bcryptjs");
 
-var app = Express();
-  app.use(BodyParser.json());
-  app.use(BodyParser.urlencoded({ extended : true }));
+
 
 const parserRequest = require ('./parse-request');
 //let router = module.exports = exports {};

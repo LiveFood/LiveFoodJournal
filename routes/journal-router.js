@@ -5,7 +5,7 @@ const router = express.Router();
 const jsonParser = require('body-parser').json();
 const mongoose = require('mongoose');
 const Journal = require('../model/journal');
-mongoose.Promise = require('bluebird');
+
 
 // const bearerAuth = require('../lib/bearer-auth.js');
 // uncomment that for user integration ^ and uncomment in POST , PATCH, PUT
