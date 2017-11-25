@@ -3,17 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
-// var MongoClient = require('mongodb').MongoClient, assert = require('assert');
-// var UUID = require('uuid');
-// var Bcrypt = require('bcryptjs');
+// const Profile = require('../model/profile');
 
 // app.use(jsonParser.json());
 const app = express();
 app.use(jsonParser.urlencoded({ extended : true }));
 
 const parserRequest = require ('./parse-request');
-//let router = module.exports = exports {};
-//router.routes = {};
 let methods = ['GET', 'GET', 'PUT', 'DELETE'];
 
 
@@ -68,6 +64,8 @@ module.exports = {
         res.end ();
       }));
   }};
+
+module.exports = router;
 
 //includes the downloaded dependencies and then initiates within project.
 
