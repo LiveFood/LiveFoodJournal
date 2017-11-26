@@ -9,7 +9,7 @@ var server = require('./server.js');
 describe('HTTP Server Test', function() {
   //function passed to before() is called before running test
   before(function() {
-    server.listen();
+    server.listen(3000);
 
   });
 
@@ -22,7 +22,7 @@ describe('HTTP Server Test', function() {
 
 describe('/', function() {
   it('should be Hello, Mocha!', function(done) {
-    http.get('http://', function() {
+    http.get('http://127.0.0.1:', function() {
       //assert the status code
       assert.equal(response.statusCode, 200);
 

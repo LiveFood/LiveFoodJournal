@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var Express = require("express");
 var UUID = require("uuid");
 var BodyParser = require('body-parser');
-var Bcrypt = require("bcrypt.js");
+var Bcrypt = require("bcrypt");
 
 var app = Express();
   app.use(BodyParser.json());
