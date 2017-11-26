@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require('../../model/user.js');
-const Profile = require('../../model/.profile.js');
+const Profile = require('../../model/profile.js');
 const Journal = require('../../model/journal.js');
 
 module.exports = () => {
