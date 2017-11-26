@@ -10,6 +10,7 @@ app.listen(PORT, () => {
 });
 app.use(require('./routes/journal-router'));
 app.use(require('./routes/recipe-router'));
+// app.use(require(__dirname + '/routes/journal-router'));
 // app.use(require('./routes/user-router'));
 
 
