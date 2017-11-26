@@ -3,12 +3,13 @@
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
-  userid: {type: String, required: true, unique: true},
-  //userid type will be mongoose.schema.type.objectid required
-  // name - unique not required
+  userid: {type: mongoose.Types.ObjectId, required: true},
+  name: {type: String, required: true },  /* unique name not required */
   // journal entries (array of objects)
-  date: {type: Date, default: Date.now},
+  journals: [ {type: mongoose.Types.ObjectId, ref: 'Journal'} ],
 });
+
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // module.exports = mongoose.model('Profile', profileSchema);
 const Profile = module.exports = mongoose.model('Profile', profileSchema);
