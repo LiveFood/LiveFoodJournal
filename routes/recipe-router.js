@@ -7,8 +7,8 @@ const jsonParser = require('body-parser').json();
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
 const Recipe = require('../model/recipe');
-mongoose.Promise = require('bluebird');
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/expressmongo', {useMongoClient: true});
+
+
 
 router.post('/api/recipe', jsonParser, /*bearerAuth,*/ (req, res, next) => {//insert bearerAuth in there <-
   console.log('HERE IN recipe POST');

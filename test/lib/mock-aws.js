@@ -2,7 +2,7 @@
 
 const awsMock = require('aws-sdk-mock');
 
-awsMock('S3', 'upload', function(params, cb) {
+awsMock.mock('S3', 'upload', function(params, cb) {
 
   if(params.ACL !== 'public-read') {return cb(new Error('ACL must be public-read'));}
 
