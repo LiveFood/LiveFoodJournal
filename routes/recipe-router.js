@@ -17,7 +17,7 @@ router.post('/api/recipe', jsonParser, /*bearerAuth,*/ (req, res, next) => {//in
 });
 
 //this GET will look for recipe/12345
-router.get('/api/recipe/:id', (req, res, next) => {
+router.get('./api/recipe/:id', (req, res, next) => {
   Recipe.findOne({_id: req.params.id})
     .then(recipe => res.send(recipe))
     .catch(err => next({error: err}));

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+// const Profile = require('./profile.js');
 
 const userSchema = new mongoose.Schema ({
 
