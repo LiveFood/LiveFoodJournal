@@ -28,7 +28,8 @@
     "faker": "^4.1.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
-    "superagent": "^3.8.1"
+    "superagent": "^3.8.1",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "aws-sdk": "^2.152.0",
