@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 'use strict';
 
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
