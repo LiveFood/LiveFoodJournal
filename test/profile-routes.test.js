@@ -1,7 +1,7 @@
 'use strict';
 
 
-var request - require('supertest');
+var request = require('supertest');
 var express = require('express');
 
 
