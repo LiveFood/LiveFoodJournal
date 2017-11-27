@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "nyc mocha",
+    "test": "mocha",
     "lint": "eslint",
     "start-db": "mkdir -p ./db && mongod --dbpath ./db",
     "stop-db": "killall mongod"
@@ -55,6 +55,6 @@
   },
   "directories": {
     "lib": "lib",
-    "test": "test"
+    "test": "mocha"
   }
 }
