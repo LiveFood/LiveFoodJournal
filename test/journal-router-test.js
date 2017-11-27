@@ -17,7 +17,7 @@ describe('testing Journal API', () => {
       return superagent.post(`${process.env.API_URL}/api/journal`)
       // .set('Authorization', `Bearer ${user.token}`)
         .send({
-          authorid: 'Max5', //change number with each test PLEASE!
+          authorid: 'Max5',
           mealConsumed: 'burger',
           mealFeedback: 'tastes good!',
         })
@@ -32,7 +32,7 @@ describe('testing Journal API', () => {
       return superagent.get(`${process.env.API_URL}/api/journal`)
         .then(res => {
           expect(res.status).toEqual(200);
-          expect(res.body[0].authorid).toEqual(['Max5']);
+          expect(res.body[0].authorid).toEqual('Max5');
           expect(res.body[0].mealConsumed).toEqual('burger');
           expect(res.body[0].mealFeedback).toEqual('tastes good!');
         });
@@ -40,5 +40,4 @@ describe('testing Journal API', () => {
     //res.body would be [] in DEL after Delete or something else to check if array is empty
     // expect([res.body]).to.be.empty();
   });
-
 });
