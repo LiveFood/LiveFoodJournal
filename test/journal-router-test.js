@@ -7,7 +7,7 @@ const cleanDB = require('./lib/clean-db.js');
 require('dotenv').config();
 const server = require('../lib/server');
 
-describe('testing POSt to Journal', () => {
+describe('testing Journal API', () => {
   before(server.start);
   after(server.stop);
   after(cleanDB);
@@ -26,4 +26,18 @@ describe('testing POSt to Journal', () => {
         });
     });
   });
+
+  describe('testing GET /api/journal', () => {
+    it('should return 200 status and a journal', () => {
+      return superagent.get(`${process.env.API_URL}/api/journal`)
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body[0].authorid).toEqual(['Max5']);
+          expect(res.body[0].mealConsumed).toEqual('burger');
+          expect(res.body[0].mealFeedback).toEqual('tastes good!');
+        });
+    });
+  
+  });
+
 });
