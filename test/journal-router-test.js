@@ -37,7 +37,8 @@ describe('testing Journal API', () => {
           expect(res.body[0].mealFeedback).toEqual('tastes good!');
         });
     });
-  
+    //res.body would be [] in DEL after Delete or something else to check if array is empty
+    // expect([res.body]).to.be.empty();
   });
 
 });

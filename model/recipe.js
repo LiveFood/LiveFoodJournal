@@ -12,3 +12,5 @@ const recipeSchema = new mongoose.Schema({
 });
 
 const Recipe = module.exports = mongoose.model('Recipe', recipeSchema);
+
+// echo '{"authorid":"Bob", "mealName":"Boss water", "ingredients":["water", "salt", "sugar"], "cookingTime":"3 minutes", "cookingLevel": "Boss" }' | http POST http://localhost:3000/api/recipe 
