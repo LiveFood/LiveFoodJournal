@@ -1,94 +1,28 @@
 'use strict';
 
 
-const router = express.Router();
-const Express = require('express');
-const BodyParser = require('body-parser');
-const User = ('../model/user.js');
+const User = require('../model/user.js');
+const jsonParser = require('body-parser').json();
+const mongoose = require('mongoose');
 
 
+const profileRouter = module.exports = require('express').Router();
 
-var app = new Expect();
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended : true }));
+profileRouter.get('/api/user', jsonParser, (req, res, next) => {
 
-//let router = module.exports = exports {};
-//router.routes = {};
+  User.findOne({_id:req.userId})
+  .then(user => {
+    if(user) res.send(200, 'Id ' + user._id);
+    else(next(404));
+  })
+  .catch(next);
 
-const profileSchema = new mongoose.Schema({
-  userName: {type: String, required: true, unique: true},
-  email: {type: String, required: true, unique: true},
-});
-
-// module.exports = mongoose.model('Profile', profileSchema);
-module.exports = mongoose.model('Profile', profileSchema);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-methods.forEach ((method) => {
-  router.routes [method.toUpperCase()] = {};
-  router [method.toLowerCase()] = function (pathname, callback) {
-    router.routes [method.toUpperCase()] [pathname] = callback;
-  };
 });
 
 
-module.exports = {
-  get : (pathname, callback) => {
-    route.GET [pathname] = callback;
 
-  },
 
-  get : (pathname, callback) => {
-    route.GET [pathname] = callback;
 
-  },
-
-  put : (pathname, callback) => {
-    route.PUT [pathname] = callback;
-
-  },
-
-  delete : (pathname, callback) => {
-    route.DELETE [pathname] = callback;
-  },
-
-  route : (req, res) => {
-    parserRequest (req)
-    .then ((req) => {
-
-      let handler = routeHandler [req.method] [req.url.pathname];
-
-      if (handler) {
-        return handler (req, res);
-
-      } else {
-
-        console.log ('error', req.url.pathname);
-        res.writeHead (404);
-        res.end ();
-        }
-      })
-
-      .catch ((err => {
-        console.log ('error invalid request', err);
-        res.writeHead (400);
-        res.end ();
-      }));
-    }};
 /*
 //connection URL
 var url = 'mongodb://localhost:27017/LiveFoodJournal';
