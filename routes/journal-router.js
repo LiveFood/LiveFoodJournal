@@ -3,13 +3,12 @@
 const Express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
-const mongoose = require('mongoose');
 const Journal = require('../model/journal');
+// const mongoose = require('mongoose');
 
 
 // const bearerAuth = require('../lib/bearer-auth.js');
 // uncomment that for user integration ^ and uncomment in POST , PATCH, PUT
-
 router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { //insert bearerAuth in there <-
   console.log('HERE IN POST');
   let newJournal = new Journal(req.body);

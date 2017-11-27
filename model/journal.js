@@ -9,5 +9,4 @@ const journalSchema = new mongoose.Schema({
   feedbackDate: {type: Date, default: Date.now},
 });
 
-// module.exports = mongoose.model('Journal', journalSchema);
 const Journal = module.exports = mongoose.model('Journal', journalSchema);
