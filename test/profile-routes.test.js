@@ -4,8 +4,18 @@
 const should = require("should");
 const request = require("superagent");
 const User = require('../lib/model/user.js');
-const expect = require("chai").expect;
-const util = require("util");
+const expect = require('expect');
+
+
+process.env.DB_URL = 'mongodb://localhost:3000';
+const PORT = 3000;
+const HOST = 'http://localhost';
+
+
+beforeAll(() => {
+  require('../lib/server.js').start(PORT);
+  return User.remove({});
+});
 
 
 
