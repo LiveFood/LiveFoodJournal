@@ -18,7 +18,7 @@ profileRouter.get('/api/profile/:name', jsonParser, (req, res, next) => {
     .catch(next);
 });
 
-profileRouter.put('/api/profile', bearerAuth, s3Upload('pic'), (req, res, next) => {
+profileRouter.put('/api/profile', bearerAuth, s3Upload('image'), (req, res, next) => {
 
   req.body.profilePic = req.s3Data.Location;
 
