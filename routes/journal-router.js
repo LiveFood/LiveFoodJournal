@@ -11,6 +11,7 @@ const Journal = require('../model/journal');
 // uncomment that for user integration ^ and uncomment in POST , PATCH, PUT
 router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { //insert bearerAuth in there <-
   console.log('HERE IN POST');
+  console.log(req.body);
   let newJournal = new Journal(req.body);
   newJournal.save()
     .then(data => res.send(data))
