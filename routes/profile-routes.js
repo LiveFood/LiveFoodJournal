@@ -1,72 +1,40 @@
 'use strict';
 
-var MongoClient = require('mongodb').MongoClient, assert = require('assert');
-var Express = require("express");
-var UUID = require("uuid");
-var BodyParser = require('body-parser');
-var Bcrypt = require("bcrypt");
 
-var app = Express();
-  app.use(BodyParser.json());
-  app.use(BodyParser.urlencoded({ extended : true }));
+const {Router} = require('express');
+const jsonParser = require('body-parser');
+const Profile = require('../model/profile.js');
+const s3Upload = require('../lib/s3-upload.js');
+const bearerAuth = require('../lib/bearer-auth.js');
 
-const parserRequest = require ('./parse-request');
-//let router = module.exports = exports {};
-//router.routes = {};
-let methods = ['GET', 'GET', 'PUT', 'DELETE'];
+const profileRouter = module.exports = new Router();
 
+profileRouter.get('/api/profile/:name', jsonParser, (req, res, next) => {
 
-methods.forEach ((method) => {
-  router.routes [ method.toUpperCase () ] = {};
-  router [ method.toLowerCase () ] = function (pathname, callback) {
-    router.routes [method.toUpperCase () ] [ pathname ] = callback;
-  };
+  return Profile.findOne({name: req.params.name})
+    .then(profile => {
+      if(!profile) {return next(new Error('profile not found'));}
+      return res.send(profile);
+    })
+    .catch(next);
 });
 
+profileRouter.put('/api/profile', bearerAuth, s3Upload('pic'), (req, res, next) => {
 
-module.exports = {
-  get: (pathname, callback) => {
-    routeHandler.GET [pathname] = callback;
+  req.body.profilePic = req.s3Data.Location;
 
-  },
+  let options = {
+    new: true,
+    runValidators: true,
+  };
 
-  get: (pathname, callback) => {
-    routeHandler.GET [pathname] = callback;
+  Profile.findOneAndUpdate({name: req.body.name}, req.body, options)
+    .then(update => {
+      return res.json(update);
+    })
+    .catch(next);
+});
 
-  },
-
-  put: (pathname, callback) => {
-    routeHandler.PUT [pathname] = callback;
-
-  },
-
-  delete: (pathname, callback) => {
-    routeHandler.DELETE [pathname] = callback;
-  },
-
-  route: (req, res) => {
-    parserRequest (req)
-    .then ((req) => {
-
-      let handler = routeHandler [req.method] [req.url.pathname];
-
-      if (handler) {
-        return handler (req, res);
-
-      } else {
-
-        console.log ('error if requested, but not located', req.url.pathname);
-        res.writeHead (404);
-        res.end ();
-        }
-      })
-
-      .catch ((err => {
-        console.log ('error invalid request', err);
-        res.writeHead (400);
-        res.end ();
-      }));
-    }};
 /*
 //connection URL
 var url = 'mongodb://localhost:27017/LiveFoodJournal';
@@ -179,9 +147,8 @@ var server = app.listen(3000, () => {
 //     "email" : request.body.email,
 //     "password" : Bcrypt.hashSync(request.body.password, 10)
 //   };
-=======
+
 // 'use strict';
->>>>>>> b7243ad2ad61aefce5992f442882208376e6c305
 //
 // var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 // var Express = require("express");
@@ -414,40 +381,3 @@ var server = app.listen(3000, () => {
 // //to accept json data via post = body-parser
 // //uuid = will allow us to generate unique keys
 // //bcryptjs = will allow us to hash passwords to defer hack
-=======
-'use strict';
-
-const {Router} = require('express');
-const jsonParser = require('body-parser');
-const Profile = require('../model/profile.js');
-const s3Upload = require('../lib/s3-upload.js');
-const bearerAuth = require('../lib/bearer-auth.js');
-
-const profileRouter = module.exports = new Router();
-
-profileRouter.get('/api/profile/:name', jsonParser, (req, res, next) => {
-
-  return Profile.findOne({name: req.params.name})
-    .then(profile => {
-      if(!profile) {return next(new Error('profile not found'));}
-      return res.send(profile);
-    })
-    .catch(next);
-});
-
-profileRouter.put('/api/profile', bearerAuth, s3Upload('pic'), (req, res, next) => {
-
-  req.body.profilePic = req.s3Data.Location;
-
-  let options = {
-    new: true,
-    runValidators: true,
-  };
-
-  Profile.findOneAndUpdate({name: req.body.name}, req.body, options)
-    .then(update => {
-      return res.json(update);
-    })
-    .catch(next);
-});
->>>>>>> 584fd040cc6d548091e8520bf345f9fd6f690c13

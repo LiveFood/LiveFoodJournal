@@ -1,15 +1,13 @@
 'use strict';
 
-<<<<<<< HEAD
+
+
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var Expect = require("expect");
 var UUID = require("uuid");
 var BodyParser = require("body-parser");
-var Bcrypt = require("bcrypt.js");
+var Bcrypt = require("bcrypt");
 
-var app = Expect();
-  app.use(BodyParser.json());
-  app.use(BodyParser.urlencoded({ extended : true }));
 
 const parserRequest = require ('./parse-request');
 //let router = module.exports = exports {};
@@ -234,7 +232,6 @@ var server = app.listen(3000, () => {
 //to accept json data via post = body-parser
 //uuid = will allow us to generate unique keys
 //bcryptjs = will allow us to hash passwords to defer hack
-=======
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
@@ -246,4 +243,3 @@ const profileSchema = new mongoose.Schema({
 });
 
 const Profile = module.exports = mongoose.model('Profile', profileSchema);
->>>>>>> 584fd040cc6d548091e8520bf345f9fd6f690c13
