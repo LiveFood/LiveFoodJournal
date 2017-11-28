@@ -55,7 +55,7 @@ module.exports = {
 
       } else {
 
-        console.log ('error', req.url.pathname);
+        console.log ('error if requested, but not located', req.url.pathname);
         res.writeHead (404);
         res.end ();
         }

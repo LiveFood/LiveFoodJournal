@@ -1,86 +1,24 @@
 'use strict';
 
 
-jest.mock('../lib/profile-routes.js', () => {
+const expect = require('expect');
+const assert = require('assert');
+const superagent = require('superagent');
+const profileRouter = require('../routes/profile-routes');
 
-  return {
 
-    parse: (req) => {
+// Tests are hierarchical. Here we define a test suite for our calculator.
+describe('Calculator Tests', function() {
+	// And then we describe our testcases.
+	it('returns 1+1=2', function(done) {
+		assert.equal(calc.add(1, 1), 2);
+		// Invoke done when the test is complete.
+		done();
+	});
 
-      let obj = {username : 'username'};
-
-      req.url = {
-        pathname: req.path,
-        query: {foo: 'bar'}
-      };
-
-      req.body = JSON.stringify(obj);
-
-      return Promise.resolve(req);
-
-    }
-  };
+	it('returns 2*2=4', function(done) {
+		assert.equal(calc.mul(2, 2), 4);
+		// Invoke done when the test is complete.
+		done();
+	});
 });
-
-let res = {
-  write: () => {},
-  writeHead: () => {},
-  end: () => {}
-};
-
-let writeHead = jest.spyOn(res, "writeHead");
-
-let router = require("../lib/routes");
-
-describe("Router", () => {
-  describe("register routes", () => {
-
-    it("reject request to non existent route", () => {
-
-      let req = {
-        method: "GET",
-        path : "/test/test"
-      };
-
-      return router.route(req, res)
-      .then(() => {
-        expect(writeHead).toBe(404);
-      });
-    });
-
-    it("registers and respond to a valid route", () => {
-
-      let req = {
-        method: "GET",
-        path: pathname
-      };
-
-      let handler = jest.fn(() => true);
-
-      router.get("/pathname", handler);
-
-      return router.route(req, res)
-      .then(() => {
-        expect(handler).toBe();
-      });
-
-
-      it("does not register and does not respond", () => {
-
-        let req = {
-          method: "FOO",
-          path: "/error/testing"
-        };
-
-        let handler = jest.fn(() => true);
-
-        router.get("/error/testing", handler);
-
-        return router.route(req, res)
-        .then(() => {
-          expect(handler).not.toBe();
-          expect(writeHead).toBe(400);
-        });
-      });
-    });
-  });
