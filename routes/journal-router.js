@@ -45,8 +45,8 @@ router.patch('/api/journal/:id', jsonParser, (req, res, next) => {
 
 router.put('/api/journal/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Journal.findOneAndUpdate({_id: req.params.id}, req.body)
-    .then(data => res.send('PUT was a success!'))
+  Journal.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+    .then(data => res.send(data))
     .catch(err => next({error: err}));
 });
 

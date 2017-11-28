@@ -52,7 +52,7 @@ describe('testing Journal API', () => {
           mealFeedback: 'Patched tastes good!',
         })
         .then(res => {
-          console.log('RES.BODYYYY', res.body);
+          // console.log('RES.BODYYYY', res.body);
           expect(res.status).toEqual(200);
           expect(res.body.authorid).toEqual('Patched Max');
           expect(res.body.mealConsumed).toEqual('Patched burger');
@@ -77,25 +77,22 @@ describe('testing Journal API', () => {
     });
   });
 
-  // describe('testing PUT /api/journal/:id', () => {
-  //
-  //   it('should PUT a journal entry', () => {
-  //
-  //     return superagent.put(`${process.env.API_URL}/api/journal/`)
-  //     // .set('Authorization', `Bearer ${user.token}`)
-  //       .send({
-  //         authorid: 'Put Max',
-  //         mealConsumed: 'Put burger',
-  //         mealFeedback: 'Put tastes good!',
-  //       })
-  //       .then(res => {
-  //         expect(res.status).toEqual(200);
-  //         expect(res.body[0].authorid).toEqual('Put Max');
-  //         expect(res.body[0].mealConsumed).toEqual('Put burger');
-  //         expect(res.body[0].mealFeedback).toEqual('Put tastes good!');
-  //       });
-  //   });
-  // });
+  describe('testing PUT /api/journal/:id', () => {
+    it('should PUT a journal entry', () => {
+      return superagent.put(`${process.env.API_URL}/api/journal/` + saveId)
+        .send({
+          authorid: 'Put Max',
+          mealConsumed: 'Put burger',
+          mealFeedback: 'Put tastes good!',
+        })
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body.authorid).toEqual('Put Max');
+          expect(res.body.mealConsumed).toEqual('Put burger');
+          expect(res.body.mealFeedback).toEqual('Put tastes good!');
+        });
+    });
+  });
 
 
 }); //end of tests
