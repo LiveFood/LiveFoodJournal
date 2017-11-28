@@ -94,6 +94,30 @@ describe('testing Journal API', () => {
     });
   });
 
+  //DELETE errrything
+  describe('testing DELETE /api/journal', () => {
+    it('should return 200 status and a journal', () => {
+      return superagent.delete(`${process.env.API_URL}/api/journal/` + saveId)
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body).toEqual({});
+          //receives empty Object ^^^
+        });
+    });
+  });
+
+  //the GET test below checks DELETE test above to make sure there's
+  //nothing to GET after DELETE ran successfully
+  describe('testing GET after Patch /api/journal', () => {
+    it('should return 200 status and a journal', () => {
+      return superagent.get(`${process.env.API_URL}/api/journal/`)
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body).toEqual([]);
+          //line above expect an empty ^ array of objects after things were DELeted
+        });
+    });
+  });
 
 }); //end of tests
 //res.body would be [] in DEL after Delete or something else to check if array is empty
