@@ -23,6 +23,7 @@
   "homepage": "https://github.com/LiveFood/LiveFoodJournal#readme",
   "devDependencies": {
     "aws-sdk-mock": "^1.7.0",
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
     "expect": "^21.2.1",
     "faker": "^4.1.0",
