@@ -14,8 +14,8 @@ router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { /
   let newJournal = new Journal(req.body);
   newJournal.save()
     .then(data => res.send(data))
-    .catch(err => next({statusCode: 500, message: 'Unable to make a journal entry', error: err}))
-
+    .catch(err => next({statusCode: 500, message: 'Unable to make a journal entry', error: err}));
+  
 });
 
 //this GET will look for journal/12345

@@ -43,15 +43,13 @@ describe('testing Journal API', () => {
   // expect([res.body]).to.be.empty();
 
   // describe('testing PATCH /api/journal/:id', () => {
-  //
   //   it('should PATCH a journal entry', () => {
-  //
-  //     return superagent.patch(`${process.env.API_URL}/api/journal/`)
+  //     return superagent.patch(`${process.env.API_URL}/api/journal/` + req.body.id)
   //     // .set('Authorization', `Bearer ${user.token}`)
   //       .send({
-  //         // delete req.body._id;
-  //         // Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body});
-  //         _id: 'req.params.id',
+  //       // delete req.body._id;
+  //       // Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body});
+  //         _id: req.body.id,
   //         authorid: 'PatchedMax',
   //         mealConsumed: 'Patched burger',
   //         mealFeedback: 'Patched tastes good!',
@@ -84,6 +82,6 @@ describe('testing Journal API', () => {
   //       });
   //   });
   // });
-  
+
 
 });//end of tests
