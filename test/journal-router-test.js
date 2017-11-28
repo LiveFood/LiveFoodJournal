@@ -12,7 +12,7 @@ describe('testing Journal API', () => {
   before(server.start);
   after(server.stop);
   after(cleanDB);
-  var saveId;
+  let saveId;
 
   describe('testing POST /api/journal', () => {
     it('should give us 200 in status', () => {
