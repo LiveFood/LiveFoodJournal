@@ -11,7 +11,10 @@ addons:
       - gcc-4.8
       - g++-4.8
 env:
-  - CXX=g++-4.8 
+  - CXX=g++-4.8
+  - PORT=3000
+  - MONGODB_URI='mongodb://localhost/dev'
+  - API_URL='http://localhost:3000'
 sudo: required
 before_script: npm i
 script:
