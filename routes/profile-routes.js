@@ -7,7 +7,7 @@ const UUID = require("uuid");
 const BodyParser = require('body-parser');
 const Bcrypt = require("bcrypt");
 const {Router} = require('express');
-const Profile = require('../model/profile.js');
+const profile = require('../model/profile.js');
 const s3Upload = require('../lib/s3-upload.js');
 const bearerAuth = require('../lib/bearer-auth.js');
 

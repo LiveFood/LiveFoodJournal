@@ -2,11 +2,24 @@
 
 
 
-var MongoClient = require('mongodb').MongoClient, assert = require('assert');
-var Expect = require("expect");
-var UUID = require("uuid");
-var BodyParser = require("body-parser");
-var Bcrypt = require("bcrypt.js");
+const MongoClient = require('mongodb').MongoClient, assert = require('assert');
+const Expect = require("expect");
+const UUID = require("uuid");
+const BodyParser = require("body-parser");
+const Bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+
+
+const profileSchema = new mongoose.Schema({
+  userid: {type: mongoose.Types.ObjectId, required: true},
+  name: {type: String, required: true },  /* unique name not required */
+  profilePic: {type: String},
+  journals: [ {type: mongoose.Types.ObjectId, ref: 'Journal'} ],
+  recipes: [ {type: mongoose.Types.ObjectId, ref: 'Recipe'} ],
+});
+
+const Profile = module.exports = mongoose.model('Profile', profileSchema);
+
 
 var app = Expect();
   app.use(BodyParser.json());
@@ -15,7 +28,7 @@ var app = Expect();
 const parserRequest = require ('./parse-request');
 //let router = module.exports = exports {};
 //router.routes = {};
-let methods = ['GET', 'GET', 'PUT', 'DELETE'];
+let methods = ['GET', 'PUT', 'DELETE'];
 
 
 methods.forEach ((method) => {
@@ -28,22 +41,17 @@ methods.forEach ((method) => {
 
 module.exports = {
   get : (pathname, callback) => {
-    route.GET [pathname] = callback;
-
-  },
-
-  get : (pathname, callback) => {
-    route.GET [pathname] = callback;
+    router.GET [pathname] = callback;
 
   },
 
   put : (pathname, callback) => {
-    route.PUT [pathname] = callback;
+    router.PUT [pathname] = callback;
 
   },
 
   delete : (pathname, callback) => {
-    route.DELETE [pathname] = callback;
+    router.DELETE [pathname] = callback;
   },
 
   route : (req, res) => {
@@ -69,6 +77,10 @@ module.exports = {
         res.end ();
       }));
     }};
+
+
+
+
 /*
 //connection URL
 var url = 'mongodb://localhost:27017/LiveFoodJournal';
@@ -235,16 +247,3 @@ var server = app.listen(3000, () => {
 //to accept json data via post = body-parser
 //uuid = will allow us to generate unique keys
 //bcryptjs = will allow us to hash passwords to defer hack
-=======
-const mongoose = require('mongoose');
-
-const profileSchema = new mongoose.Schema({
-  userid: {type: mongoose.Types.ObjectId, required: true},
-  name: {type: String, required: true },  /* unique name not required */
-  profilePic: {type: String},
-  journals: [ {type: mongoose.Types.ObjectId, ref: 'Journal'} ],
-  recipes: [ {type: mongoose.Types.ObjectId, ref: 'Recipe'} ],
-});
-
-const Profile = module.exports = mongoose.model('Profile', profileSchema);
->>>>>>> 584fd040cc6d548091e8520bf345f9fd6f690c13
