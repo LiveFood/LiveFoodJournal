@@ -108,7 +108,7 @@ describe('testing Journal API', () => {
 
   //the GET test below checks DELETE test above to make sure there's
   //nothing to GET after DELETE ran successfully
-  describe('testing GET after Patch /api/journal', () => {
+  describe('testing GET after DELETE /api/journal', () => {
     it('should return 200 status and a journal', () => {
       return superagent.get(`${process.env.API_URL}/api/journal/`)
         .then(res => {
