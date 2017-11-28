@@ -15,7 +15,7 @@ router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { /
   console.log('HERE IN POST');
   let newJournal = new Journal(req.body);
   newJournal.save()
-    .then(data => res.send(data))
+    .then(data => res.send(data)) //sending data back
     .catch(err => next({statusCode: 500, message: 'Unable to make a journal entry', error: err}));
 
 });
