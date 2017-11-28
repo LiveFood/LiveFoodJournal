@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var Express = require("express");
 var UUID = require("uuid");
 var BodyParser = require('body-parser');
-var Bcrypt = require("bcrypt.js");
+var Bcrypt = require("bcrypt");
 
 var app = Express();
   app.use(BodyParser.json());
@@ -25,26 +25,26 @@ methods.forEach ((method) => {
 
 
 module.exports = {
-  get : (pathname, callback) => {
-    route.GET [pathname] = callback;
+  get: (pathname, callback) => {
+    routeHandler.GET [pathname] = callback;
 
   },
 
-  get : (pathname, callback) => {
-    route.GET [pathname] = callback;
+  get: (pathname, callback) => {
+    routeHandler.GET [pathname] = callback;
 
   },
 
-  put : (pathname, callback) => {
-    route.PUT [pathname] = callback;
+  put: (pathname, callback) => {
+    routeHandler.PUT [pathname] = callback;
 
   },
 
-  delete : (pathname, callback) => {
-    route.DELETE [pathname] = callback;
+  delete: (pathname, callback) => {
+    routeHandler.DELETE [pathname] = callback;
   },
 
-  route : (req, res) => {
+  route: (req, res) => {
     parserRequest (req)
     .then ((req) => {
 
