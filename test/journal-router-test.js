@@ -12,7 +12,7 @@ describe('testing Journal API', () => {
   before(server.start);
   after(server.stop);
   after(cleanDB);
-  let saveId;
+  let saveId; //to track ID of journals
 
   describe('testing POST /api/journal', () => {
     it('should give us 200 in status', () => {
@@ -25,7 +25,7 @@ describe('testing Journal API', () => {
           mealFeedback: 'tastes good!',
         })
         .then(res => {
-          saveId = res.body._id;
+          saveId = res.body._id; //set journal ID to the one grabbed from req.body
           return expect(res.status).toEqual(200);
         });
     });
@@ -94,8 +94,8 @@ describe('testing Journal API', () => {
     });
   });
 
-  //DELETE errrything
-  describe('testing DELETE /api/journal', () => {
+  //DELETE errrything by that id
+  describe('testing DELETE /api/journal/:id', () => {
     it('should return 200 status and a journal', () => {
       return superagent.delete(`${process.env.API_URL}/api/journal/` + saveId)
         .then(res => {
@@ -120,5 +120,3 @@ describe('testing Journal API', () => {
   });
 
 }); //end of tests
-//res.body would be [] in DEL after Delete or something else to check if array is empty
-// expect([res.body]).to.be.empty();

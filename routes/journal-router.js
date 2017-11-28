@@ -6,13 +6,10 @@ const jsonParser = require('body-parser').json();
 const Journal = require('../model/journal');
 // const mongoose = require('mongoose');
 
-
-
-
 // const bearerAuth = require('../lib/bearer-auth.js');
 // uncomment that for user integration ^ and uncomment in POST , PATCH, PUT
 router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { //insert bearerAuth in there <-
-  console.log('HERE IN POST');
+  // console.log('HERE IN POST');
   let newJournal = new Journal(req.body);
   newJournal.save()
     .then(data => res.send(data)) //sending data back
@@ -29,7 +26,7 @@ router.get('/api/journal/:id', (req, res, next) => {
 
 //This will GET query ?_id=123 or no ID and show all
 router.get('/api/journal', (req, res, next) => {
-  console.log('HERE IN GET');
+  // console.log('HERE IN GET');
   let findObj = req.query || {};
   Journal.find(findObj)
     .then(journal => res.send(journal))
@@ -38,14 +35,14 @@ router.get('/api/journal', (req, res, next) => {
 
 router.patch('/api/journal/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true})
+  Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true}) //new entry after updates
     .then(data => res.send(data))
     .catch(err => next({error: err}));
 });
 
 router.put('/api/journal/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Journal.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+  Journal.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}) //new entry after updates
     .then(data => res.send(data))
     .catch(err => next({error: err}));
 });

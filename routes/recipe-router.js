@@ -3,16 +3,16 @@
 const express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
+const Recipe = require('../model/recipe');
 
 // mongoose.Promise = global.Promise;
 // const mongoose = require('mongoose');
-const Recipe = require('../model/recipe');
 
 router.post('/api/recipe', jsonParser, /*bearerAuth,*/ (req, res, next) => {//insert bearerAuth in there <-
-  console.log('HERE IN recipe POST');
+  // console.log('HERE IN recipe POST');
   let newRecipe = new Recipe(req.body);
   newRecipe.save()
-    .then(data => res.send(data))
+    .then(data => res.send(data)) //sending data back
     .catch(err => next({statusCode: 500, message: 'Unable to make a recipe entry', error: err}));
 });
 
@@ -25,7 +25,7 @@ router.get('./api/recipe/:id', (req, res, next) => {
 
 //this will GET query ?_id=123 or no ID and show all
 router.get('/api/recipe', (req, res, next) => {
-  console.log('HERE IN recipe GET');
+  // console.log('HERE IN recipe GET');
   let findObj = req.query || {};
   Recipe.find(findObj)
     .then(recipe => res.send(recipe))
@@ -35,15 +35,15 @@ router.get('/api/recipe', (req, res, next) => {
 
 router.patch('/api/recipe/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Recipe.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
-    .then(data => res.send('patched successfully '))
+  Recipe.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true})
+    .then(data => res.send(data)) //sending data back
     .catch(err => next({error: err}));
 });
 
 router.put('/api/recipe/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Recipe.findOneAndUpdate({_id: req.params.id}, req.body)
-    .then(data => res.send('recipe PUT command was a success!'))
+  Recipe.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+    .then(data => res.send(data)) //sending data back
     .catch(err => next({error: err}));
 });
 
