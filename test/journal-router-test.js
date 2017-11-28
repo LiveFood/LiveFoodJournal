@@ -12,17 +12,20 @@ describe('testing Journal API', () => {
   before(server.start);
   after(server.stop);
   after(cleanDB);
+  var saveId;
 
   describe('testing POST /api/journal', () => {
     it('should give us 200 in status', () => {
       return superagent.post(`${process.env.API_URL}/api/journal`)
       // .set('Authorization', `Bearer ${user.token}`)
+      // uncomment the line above ^ when Devin's user stuff is running
         .send({
           authorid: 'Max',
           mealConsumed: 'burger',
           mealFeedback: 'tastes good!',
         })
         .then(res => {
+          saveId = res.body._id;
           return expect(res.status).toEqual(200);
         });
     });
@@ -39,29 +42,42 @@ describe('testing Journal API', () => {
         });
     });
   });
-  //res.body would be [] in DEL after Delete or something else to check if array is empty
-  // expect([res.body]).to.be.empty();
 
-  // describe('testing PATCH /api/journal/:id', () => {
-  //   it('should PATCH a journal entry', () => {
-  //     return superagent.patch(`${process.env.API_URL}/api/journal/` + req.body.id)
-  //     // .set('Authorization', `Bearer ${user.token}`)
-  //       .send({
-  //       // delete req.body._id;
-  //       // Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body});
-  //         _id: req.body.id,
-  //         authorid: 'PatchedMax',
-  //         mealConsumed: 'Patched burger',
-  //         mealFeedback: 'Patched tastes good!',
-  //       })
-  //       .then(res => {
-  //         expect(res.status).toEqual(200);
-  //         expect(res.body[0].authorid).toEqual('PatchedMax');
-  //         expect(res.body[0].mealConsumed).toEqual('Patched burger');
-  //         expect(res.body[0].mealFeedback).toEqual('Patched tastes good!');
-  //       });
-  //   });
-  // });
+  describe('testing PATCH /api/journal/:id', () => {
+    it('should PATCH a journal entry', () => {
+      return superagent.patch(`${process.env.API_URL}/api/journal/` + saveId)
+      // .set('Authorization', `Bearer ${user.token}`)
+      // uncomment the line above ^ when Devin's user stuff is running
+        .send({
+          authorid: 'Patched Max',
+          mealConsumed: 'Patched burger',
+          mealFeedback: 'Patched tastes good!',
+        })
+        .then(res => {
+          console.log('RES.BODYYYY', res.body);
+          expect(res.status).toEqual(200);
+          expect(res.body.authorid).toEqual('Patched Max');
+          expect(res.body.mealConsumed).toEqual('Patched burger');
+          expect(res.body.mealFeedback).toEqual('Patched tastes good!');
+        });
+    });
+  });
+
+  //the following GET test is not a duplicate. It checks After PATCH ^ test to
+  //see what is actually in the data base, if things patched for sure, and
+  //that the result of PATCH test aren't just echoing themselves back.
+  //the GET test below checks the PATCH test above. phew!... good
+  describe('testing GET after Patch /api/journal', () => {
+    it('should return 200 status and a journal', () => {
+      return superagent.get(`${process.env.API_URL}/api/journal/`)
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body[0].authorid).toEqual('Patched Max');
+          expect(res.body[0].mealConsumed).toEqual('Patched burger');
+          expect(res.body[0].mealFeedback).toEqual('Patched tastes good!');
+        });
+    });
+  });
 
   // describe('testing PUT /api/journal/:id', () => {
   //
@@ -84,4 +100,6 @@ describe('testing Journal API', () => {
   // });
 
 
-});//end of tests
+}); //end of tests
+//res.body would be [] in DEL after Delete or something else to check if array is empty
+// expect([res.body]).to.be.empty();

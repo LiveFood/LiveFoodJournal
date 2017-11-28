@@ -7,6 +7,8 @@ const Journal = require('../model/journal');
 // const mongoose = require('mongoose');
 
 
+
+
 // const bearerAuth = require('../lib/bearer-auth.js');
 // uncomment that for user integration ^ and uncomment in POST , PATCH, PUT
 router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { //insert bearerAuth in there <-
@@ -15,7 +17,7 @@ router.post('/api/journal', jsonParser, /*bearerAuth, */ (req, res, next) => { /
   newJournal.save()
     .then(data => res.send(data))
     .catch(err => next({statusCode: 500, message: 'Unable to make a journal entry', error: err}));
-  
+
 });
 
 //this GET will look for journal/12345
@@ -36,8 +38,8 @@ router.get('/api/journal', (req, res, next) => {
 
 router.patch('/api/journal/:id', jsonParser, (req, res, next) => {
   delete req.body._id;
-  Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
-    .then(data => res.send('patched successfully '))
+  Journal.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true})
+    .then(data => res.send(data))
     .catch(err => next({error: err}));
 });
 
