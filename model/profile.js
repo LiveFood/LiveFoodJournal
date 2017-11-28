@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 
 
 var MongoClient = require('mongodb').MongoClient, assert = require('assert');
@@ -235,3 +236,16 @@ var server = app.listen(3000, () => {
 //to accept json data via post = body-parser
 //uuid = will allow us to generate unique keys
 //bcryptjs = will allow us to hash passwords to defer hack
+=======
+const mongoose = require('mongoose');
+
+const profileSchema = new mongoose.Schema({
+  userid: {type: mongoose.Types.ObjectId, required: true},
+  name: {type: String, required: true },  /* unique name not required */
+  profilePic: {type: String},
+  journals: [ {type: mongoose.Types.ObjectId, ref: 'Journal'} ],
+  recipes: [ {type: mongoose.Types.ObjectId, ref: 'Recipe'} ],
+});
+
+const Profile = module.exports = mongoose.model('Profile', profileSchema);
+>>>>>>> 584fd040cc6d548091e8520bf345f9fd6f690c13

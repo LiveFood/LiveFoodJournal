@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const Profile = require('./profile.js');
 
 const userSchema = new mongoose.Schema ({
 
@@ -73,5 +74,14 @@ User.create = function (data) {
   delete data.password;
 
   return new User (data).createPasswordHash(password)
-    .then(user => user.createToken());
+    .then(newUser => {
+      let profileData = {
+        userId: newUser._id,
+        name: newUser.name,
+      };
+      new Profile(profileData)
+        .save();
+      return newUser;
+    })
+    .then(newUser => newUser.createToken());
 };

@@ -4,19 +4,16 @@ const express = require('express');
 const router = express.Router();
 const jsonParser = require('body-parser').json();
 
-const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
+// const mongoose = require('mongoose');
 const Recipe = require('../model/recipe');
-mongoose.Promise = require('bluebird');
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/expressmongo', {useMongoClient: true});
 
 router.post('/api/recipe', jsonParser, /*bearerAuth,*/ (req, res, next) => {//insert bearerAuth in there <-
   console.log('HERE IN recipe POST');
   let newRecipe = new Recipe(req.body);
   newRecipe.save()
     .then(data => res.send(data))
-    .catch(err => next({statusCode: 500, message: 'Unable to make a recipe entry', error: err}))
-
+    .catch(err => next({statusCode: 500, message: 'Unable to make a recipe entry', error: err}));
 });
 
 //this GET will look for recipe/12345
