@@ -77,11 +77,14 @@ User.create = function (data) {
     .then(newUser => {
       let profileData = {
         userId: newUser._id,
-        name: newUser.name,
+        name: newUser.userName,
       };
       new Profile(profileData)
-        .save();
-      return newUser;
+        .save()
+        .then(newUser => newUser)
+        .catch(err => console.log(err));
+
     })
-    .then(newUser => newUser.createToken());
+    .then(newUser => newUser.createToken())
+    .catch(err => console.log(err));
 };

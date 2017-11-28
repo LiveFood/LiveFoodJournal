@@ -6,7 +6,7 @@ awsMock.mock('S3', 'upload', function(params, cb) {
 
   if(params.ACL !== 'public-read') {return cb(new Error('ACL must be public-read'));}
 
-  if(params.Bucket !== 'fake-buket') {return cb(new Error('bucket must be fake-buc  '));}
+  if(params.Bucket !== 'fake-bucket') {return cb(new Error('bucket must be fake-bucket'));}
 
   if(!params.Key) {return cb(new Error('key must be set'));}
 
