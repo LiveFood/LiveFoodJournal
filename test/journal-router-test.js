@@ -18,7 +18,7 @@ describe('testing Journal API', () => {
     it('should give us 200 in status', () => {
       return superagent.post(`${process.env.API_URL}/api/journal`)
       // .set('Authorization', `Bearer ${user.token}`)
-      // uncomment the line above ^ when Devin's user stuff is running
+      // uncomment the line above ^ when Devin's user stuff is running and use it in other places as needed
         .send({
           authorid: 'Max',
           mealConsumed: 'burger',
@@ -46,8 +46,6 @@ describe('testing Journal API', () => {
   describe('testing PATCH /api/journal/:id', () => {
     it('should PATCH a journal entry', () => {
       return superagent.patch(`${process.env.API_URL}/api/journal/` + saveId)
-      // .set('Authorization', `Bearer ${user.token}`)
-      // uncomment the line above ^ when Devin's user stuff is running
         .send({
           authorid: 'Patched Max',
           mealConsumed: 'Patched burger',
