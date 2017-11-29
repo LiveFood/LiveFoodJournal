@@ -57,7 +57,6 @@ describe('testing Recipe API', () => {
           cookingLevel: 'Pro',
         })
         .then(res => {
-          // console.log('RES.BODYYYY', res.body);
           expect(res.status).toEqual(200);
           expect(res.body.authorid).toEqual('Maaax');
           expect(res.body.mealName).toEqual('Cheese pizza');
@@ -68,8 +67,8 @@ describe('testing Recipe API', () => {
     });
   });
 
-  //fix patch test and uncomment
-  //testing previous PATCH test with the follwing GET test
+  // fix patch test and uncomment
+  // testing previous PATCH test with the follwing GET test
   // describe('testing GET after Patch /api/recipe', () => {
   //   it('should return 200 status and a recipe', () => {
   //     return superagent.get(`${process.env.API_URL}/api/recipe/`)
@@ -77,7 +76,7 @@ describe('testing Recipe API', () => {
   //         expect(res.status).toEqual(200);
   //         expect(res.body[0].authorid).toEqual('Maaax');
   //         expect(res.body[0].mealName).toEqual('Cheese pizza');
-  //         expect(res.body[0].ingredients).toEqual(['Some cheese and some ', 'pizza', 'pineapple']);
+  //         expect(res.body[0].ingredients).toEqual(['Some cheese and some ','pizza', 'pineapple']);
   //         expect(res.body[0].cookingTime).toEqual('50 min');
   //         expect(res.body[0].cookingLevel).toEqual('Pro');
   //       });
