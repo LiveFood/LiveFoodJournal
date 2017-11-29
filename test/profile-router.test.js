@@ -8,7 +8,7 @@ const profile = require('../model/profile');
 
 
 describe('testing GET /api/profile', () => {
-  it('should return 200 status and a user', () => {
+  it('should return 200 status and a user profile', () => {
     return profile.get('/api/profile/')
     .then(res => {
       expect(res.status).toEqual(200);
