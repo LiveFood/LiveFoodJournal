@@ -25,11 +25,10 @@ describe('testing GET /api/profile', () => {
     describe('testing POST /api/profile', () => {
       it('should give us 200 in status', () => {
         return profile.get('/api/journal/')
-        // .set('Authorization', `Bearer ${user.token}`)
         .send({
-          userId: 'Brian',
-          name: 'Brian',
-          journal: 'mm that was delicious!',
+          userId: 'userId',
+          name: 'user name',
+          journal: 'yummy that was delicious!',
           recipe: 'chicken salad',
         })
         .then(res => {
@@ -37,4 +36,5 @@ describe('testing GET /api/profile', () => {
         });
       });
     });
-  };
+  });
+};
