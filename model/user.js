@@ -73,18 +73,21 @@ User.create = function (data) {
   let password = data.password;
   delete data.password;
 
-  return new User (data).createPasswordHash(password)
+  let newUser = new User(data);
+
+  return newUser.createPasswordHash(password)
     .then(newUser => {
       let profileData = {
         userId: newUser._id,
-        name: newUser.userName,
+        userName: newUser.userName,
       };
-      new Profile(profileData)
-        .save()
-        .then(newUser => newUser)
-        .catch(err => console.log(err));
+      return new Profile(profileData)
+        .save();
+        // .then(newUser => {console.log(newUser);
+          // return newUser;})
+        // .catch(err => console.log(err));
 
     })
-    .then(newUser => newUser.createToken())
+    .then(profile => {console.log(profile); return newUser.createToken();})
     .catch(err => console.log(err));
 };
