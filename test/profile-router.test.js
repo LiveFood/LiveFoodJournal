@@ -8,33 +8,23 @@ const profile = require('../model/profile');
 
 
 describe('testing GET /api/profile', () => {
-  it('should return 200 status and a journal', () => {
-    return profileRouter.get('/api/journal/')
+  it('should return 200 status and a user', () => {
+    return profile.get('/api/profile/')
     .then(res => {
       expect(res.status).toEqual(200);
-      expect(res.body[0].userid).toEqual('Brian');
-      expect(res.body[0].name).toEqual('Brian');
-      expect(res.body[0].objectId).toEqual('Journal');
-      expect(res.body[0].objectId).toEqual('Recipe');
+      expect(res.body[0].userid).toEqual('user id');
+      expect(res.body[0].name).toEqual('user name');
      });
     });
   });
 
 
-  describe('testing Profile', () => {
-    describe('testing POST /api/profile', () => {
+describe('testing POST /api/profile', () => {
       it('should give us 200 in status', () => {
-        return profile.get('/api/journal/')
-        .send({
-          userId: 'userId',
-          name: 'user name',
-          journal: 'yummy that was delicious!',
-          recipe: 'chicken salad',
-        })
+        return profile.post('/api/user/')
         .then(res => {
           return expect(res.status).toEqual(200);
         });
       });
     });
-  });
 };
