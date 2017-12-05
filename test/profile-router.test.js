@@ -3,7 +3,6 @@
 
 const mongoose = require('mongoose');
 const expect = require('expect');
-const assert = require('assert');
 const profile = require('../model/profile');
 
 
