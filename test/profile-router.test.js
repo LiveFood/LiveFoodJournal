@@ -12,8 +12,8 @@ describe('testing GET /api/profile', () => {
     return profile.get('/api/profile/')
     .then(res => {
       expect(res.status).toEqual(200);
-      expect(res.body[0].userid).toEqual('user id');
-      expect(res.body[0].name).toEqual('user name');
+      expect(res.body[0].userid).toEqual('userid');
+      expect(res.body[0].name).toEqual('name');
      });
     });
   });
