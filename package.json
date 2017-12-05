@@ -53,6 +53,6 @@
   },
   "directories": {
     "lib": "lib",
-    "test": "test"
+    "test": "mocha"
   }
 }

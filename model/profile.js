@@ -2,28 +2,26 @@
 
 
 
+const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient, assert = require('assert');
 const Expect = require("expect");
 const UUID = require("uuid");
 const BodyParser = require("body-parser");
 const Bcrypt = require("bcrypt");
-const mongoose = require('mongoose');
+
 
 
 const profileSchema = new mongoose.Schema({
-  userid: {type: mongoose.Types.ObjectId, required: true},
-  name: {type: String, required: true },  /* unique name not required */
-  profilePic: {type: String},
-  journals: [ {type: mongoose.Types.ObjectId, ref: 'Journal'} ],
-  recipes: [ {type: mongoose.Types.ObjectId, ref: 'Recipe'} ],
+  userId: {type: String, required: true},
+  name: {type: String, required: true },
 });
 
-const Profile = module.exports = mongoose.model('Profile', profileSchema);
 
-
+/*
 var app = Expect();
-  app.use(BodyParser.json());
-  app.use(BodyParser.urlencoded({ extended : true }));
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended : true }));
+*/
 
 const parserRequest = require ('./parse-request');
 //let router = module.exports = exports {};
@@ -34,7 +32,7 @@ let methods = ['GET', 'PUT', 'DELETE'];
 methods.forEach ((method) => {
   router.routes [method.toUpperCase()] = {};
   router [method.toLowerCase()] = function (pathname, callback) {
-    router.routes [method.toUpperCase()] [pathname] = callback;
+  router.routes [method.toUpperCase()] [pathname] = callback;
   };
 });
 

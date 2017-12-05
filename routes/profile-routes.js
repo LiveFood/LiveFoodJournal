@@ -8,8 +8,8 @@ const BodyParser = require('body-parser');
 const Bcrypt = require("bcrypt");
 const {Router} = require('express');
 const profile = require('../model/profile.js');
-const s3Upload = require('../lib/s3-upload.js');
-const bearerAuth = require('../lib/bearer-auth.js');
+//const s3Upload = require('../lib/s3-upload.js');
+//const bearerAuth = require('../lib/bearer-auth.js');
 
 const profileRouter = module.exports = new Router();
 
@@ -20,7 +20,7 @@ var app = Express();
   app.use(BodyParser.urlencoded({ extended : true }));
 
 
-const parserRequest = require ('./parse-request');
+const parserRequest = require ('../body-parser');
 //let router = module.exports = exports {};
 //router.routes = {};
 let methods = ['GET', 'PUT'];
