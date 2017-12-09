@@ -1,61 +1,64 @@
 'use strict';
 
 
-const MongoClient = require('mongodb').MongoClient, assert = require('assert');
-const Express = require("express");
-const UUID = require("uuid");
-const BodyParser = require('body-parser');
-const Bcrypt = require("bcrypt");
-const {Router} = require('express');
-const profile = require('../model/profile.js');
-//const s3Upload = require('../lib/s3-upload.js');
-//const bearerAuth = require('../lib/bearer-auth.js');
+const parseRequest = require('../routes/profile-routes.js');
 
-const profileRouter = module.exports = new Router();
+
+let methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
 
 
 
-var app = Express();
-  app.use(BodyParser.json());
-  app.use(BodyParser.urlencoded({ extended : true }));
-
-
-const parserRequest = require ('../body-parser');
-//let router = module.exports = exports {};
-//router.routes = {};
-let methods = ['GET', 'PUT'];
-
-
-methods.forEach ((method) => {
-  router.routes [ method.toUpperCase () ] = {};
-  router [ method.toLowerCase () ] = function (pathname, callback) {
-    router.routes [method.toUpperCase () ] [ pathname ] = callback;
+methods.forEach((method) => {
+  router.routes [method.toUpperCase()] = {};
+  router [method.toLowerCase()] = function (pathname, callback) {
+    router.routes [method.toUpperCase() ] [pathname] = callback;
   };
+});
 
 
-  profileRouter.get('/api/profile/:name', jsonParser, (req, res, next) => {
 
-    return Profile.findOne({name: req.params.name})
-      .then(profile => {
-        if(!profile) {return next(new Error('profile not found'));}
-        return res.send(profile);
+module.exports = {
+  get : (pathname, callback) => {
+    route.GET [pathname] = callback;
+  },
+
+  post : (pathname, callback) => {
+    route.POST [pathname] = callback;
+  },
+
+  put : (pathname, callback) => {
+    route.PUT [pathname] = callback;
+  },
+
+  patch : (pathname, callback) => {
+    route.PATCH [pathname] = callback;
+  },
+
+  delete : (pathname, callback) => {
+    route.DELETE [pathname] = callback;
+  },
+
+  route : (req, res) => {
+    parserRequest (req)
+    .then ((req) => {
+
+      let handler = routeHandler [req.method] [req.url.pathname];
+
+      if (handler) {
+        return handler (req, res);
+
+      } else {
+
+        console.log ('error', req.url.pathname);
+        res.writeHead (404);
+        res.end ();
+        }
       })
-      .catch(next);
 
-  });
-
-  profileRouter.put('/api/profile', bearerAuth, s3Upload('pic'), (req, res, next) => {
-
-    req.body.profilePic = req.s3Data.Location;
-
-    let options = {
-      new: true,
-      runValidators: true,
-    };
-
-    Profile.findOneAndUpdate({name: req.body.name}, req.body, options)
-      .then(update => {
-        return res.json(update);
-      })
-      .catch(next);
-  });
+      .catch ((err => {
+        console.log ('error invalid request', err);
+        res.writeHead (400);
+        res.end ();
+      });
+    });
+  };
