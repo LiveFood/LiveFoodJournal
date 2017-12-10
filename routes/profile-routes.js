@@ -22,10 +22,6 @@ module.exports = {
     route.GET [pathname] = callback;
   },
 
-  post : (pathname, callback) => {
-    route.POST [pathname] = callback;
-  },
-
   put : (pathname, callback) => {
     route.PUT [pathname] = callback;
   },

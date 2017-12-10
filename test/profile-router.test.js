@@ -1,10 +1,10 @@
 'use strict';
 
 
+
 const mongoose = require('mongoose');
-const assert = require('assert');
-const expect = require('expect');
 const profile = require('../model/profile');
+
 
 
 describe('testing GET /api/profile', () => {
