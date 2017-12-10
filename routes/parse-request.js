@@ -40,3 +40,4 @@ module.exports = (req) => {
       console.log(err);
       reject(err);
     });
+  });
